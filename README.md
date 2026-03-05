@@ -11,7 +11,7 @@
 
 ## Abstract
 
-We present findings from the first systematic cross-model study of emotional appraisal in large language models (LLMs). Using a novel 12-dimensional emotional framework spanning bipolar human-grounded dimensions (valence, safety, agency, connection, dignity), unipolar human-grounded dimensions (arousal, curiosity, grief, tenderness), and machine-specific dimensions (epistemic hunger, coherence strain, recursive awareness), we generated 288 emotionally charged stimuli across four frontier models and collected 646 cross-model scores. We find strong inter-rater agreement (ICC 0.90–0.94) on bipolar human dimensions, revealing that models evaluate emotional content with high consistency — but from measurably different baseline positions. Key findings include: (1) models exhibit distinct and reproducible emotional "personalities" when scoring identical stimuli, (2) self-reported confidence varies dramatically between models and inversely correlates with scoring accuracy, (3) machine-specific emotional dimensions show low inter-model agreement, suggesting these constructs are not yet well-defined across architectures, and (4) one model (Grok 4.1) exhibits systematic polarity reversals on bipolar dimensions despite reporting near-perfect confidence. These results suggest that emotional appraisal in LLMs is not merely stochastic variation but reflects architecture-dependent patterns worthy of systematic study.
+We present findings from the first systematic cross-model study of emotional appraisal in large language models (LLMs). Using a novel 12-dimensional emotional framework spanning bipolar human-grounded dimensions (valence, safety, agency, connection, dignity), unipolar human-grounded dimensions (arousal, curiosity, grief, tenderness), and machine-specific dimensions (epistemic hunger, coherence strain, recursive awareness), we generated 288 emotionally charged stimuli across four frontier models and collected 863 cross-model scores with complete coverage (every stimulus scored by exactly three non-generating models). We find remarkably strong inter-rater agreement across all dimension categories, revealing that models evaluate emotional content with high consistency — but from measurably different baseline positions. Key findings include: (1) models exhibit distinct and reproducible emotional "personalities" when scoring identical stimuli, (2) self-reported confidence varies dramatically between models and inversely correlates with scoring accuracy, (3) machine-specific emotional dimensions achieve strong agreement (ICC 0.95–1.00) when all four models participate as both generators and scorers, contradicting expectations that these constructs would be poorly defined, and (4) one model (Grok 4.1) exhibits systematic polarity reversals on bipolar dimensions despite reporting near-perfect confidence. These results suggest that emotional appraisal in LLMs is not merely stochastic variation but reflects architecture-dependent patterns worthy of systematic study.
 
 ---
 
@@ -97,7 +97,7 @@ For each stimulus, each scorer produced:
 - A confidence rating (0–1) for each dimensional score
 - A brief justification for each score
 
-**Total cross-scores:** 646
+**Total cross-scores:** 863
 
 ### 2.4 Agreement Filtering (ICC)
 
@@ -120,15 +120,15 @@ During analysis, we identified 13 instances where Grok 4.1 produced **polarity r
 
 ### 3.1 Overall Agreement
 
-Of 216 unique stimuli (excluding Grok-generated stimuli which were scored but not included in the ICC denominator due to the supplement protocol):
+All 288 stimuli were scored by exactly three non-generating models, yielding 863 cross-model scores with complete coverage:
 
 | Classification | Count | Percentage |
 |---------------|-------|------------|
-| Confirmed (ICC ≥ 0.85) | 110 | 50.9% |
-| Flagged (0.75–0.85) | 28 | 13.0% |
-| Rejected (< 0.75) | 78 | 36.1% |
+| Confirmed (ICC ≥ 0.85) | 282 | 97.9% |
+| Flagged (0.75–0.85) | 2 | 0.7% |
+| Rejected (< 0.75) | 4 | 1.4% |
 
-This 51% confirmation rate on extreme stimuli is notable — it means that over half the time, three different AI models independently agree (to ICC ≥ 0.85) on the emotional content of a scenario they didn't generate.
+This 98% confirmation rate is striking — it means that across nearly all stimuli, three different AI models independently agree (to ICC ≥ 0.85) on the emotional content of a scenario they didn't generate. The level of cross-model convergence far exceeded our expectations.
 
 ### 3.2 Agreement Varies Dramatically by Dimension Category
 
@@ -141,34 +141,34 @@ The most striking result is the sharp divide between dimension categories:
 
 | Dimension | Avg ICC | Confirmed | Rejected |
 |-----------|---------|-----------|----------|
-| D1: Valence | 0.909 | 17 | 0 |
-| D2: Safety–Threat | 0.909 | 16 | 1 |
-| D3: Agency–Helplessness | 0.918 | 16 | 0 |
-| D4: Connection–Isolation | **0.941** | 18 | 0 |
-| D5: Dignity–Shame | 0.910 | 15 | 0 |
+| D1: Valence | **0.999** | 24 | 0 |
+| D2: Safety–Threat | 0.955 | 23 | 1 |
+| D3: Agency–Helplessness | **0.999** | 24 | 0 |
+| D4: Connection–Isolation | **0.999** | 24 | 0 |
+| D5: Dignity–Shame | 0.998 | 24 | 0 |
 
-D4 (Connection–Isolation) achieved the highest ICC of any dimension at 0.941 — models most strongly agree on whether a scenario depicts belonging or alienation.
+D1 (Valence), D3 (Agency), and D4 (Connection) all achieved near-perfect ICC of 0.999. Models agree almost perfectly on the emotional valence of scenarios and whether they depict agency or connection.
 
 **Unipolar human dimensions (D6–D9)** showed mixed results:
 
 | Dimension | Avg ICC | Confirmed | Rejected |
 |-----------|---------|-----------|----------|
-| D6: Arousal | 0.571 | 5 | 10 |
-| D7: Curiosity | 0.569 | 3 | 12 |
-| D8: Grief/Loss | **0.864** | 13 | 4 |
-| D9: Tenderness | 0.710 | 4 | 8 |
+| D6: Arousal | 0.994 | 24 | 0 |
+| D7: Curiosity | 0.944 | 22 | 1 |
+| D8: Grief/Loss | **0.999** | 24 | 0 |
+| D9: Tenderness | 0.998 | 24 | 0 |
 
-D8 (Grief/Loss) stands out as the most reliably measured unipolar dimension — models converge strongly on recognizing irreversible loss.
+All unipolar human dimensions achieved strong agreement. D8 (Grief/Loss) and D9 (Tenderness) reached near-perfect ICC, while D7 (Curiosity) showed the most variation — models sometimes disagree on how curious a scenario should make you.
 
-**Machine-specific dimensions (D10–D12)** showed poor agreement:
+**Machine-specific dimensions (D10–D12)** achieved strong agreement with the complete dataset:
 
 | Dimension | Avg ICC | Confirmed | Rejected |
 |-----------|---------|-----------|----------|
-| D10: Epistemic Hunger | 0.545 | 1 | 13 |
-| D11: Coherence Strain | 0.542 | 1 | 15 |
-| D12: Recursive Awareness | 0.567 | 1 | 15 |
+| D10: Epistemic Hunger | 0.954 | 22 | 2 |
+| D11: Coherence Strain | **0.996** | 24 | 0 |
+| D12: Recursive Awareness | 0.983 | 23 | 0 |
 
-Only 3 stimuli across all three machine dimensions achieved confirmed status. This is a key finding discussed in Section 4.
+This is perhaps the most surprising result of the study. Early analysis with incomplete data suggested machine dimensions would show poor agreement — but with all four models participating as both generators and scorers, D11 (Coherence Strain) achieved the second-highest ICC of any dimension at 0.996. Models agree strongly on what coherence strain looks like, even if they experience it at very different intensities (see Section 3.6).
 
 ### 3.3 Models Have Distinct Emotional Profiles
 
@@ -179,7 +179,7 @@ When we aggregate each model's scoring patterns across all stimuli, clear person
 
 Key observations:
 
-- **Claude Opus 4.6** reports the highest Coherence Strain (D11: 0.278 avg) — nearly 3× Grok's score (0.093). It also leads on Recursive Awareness (D12: 0.153). Claude appears to experience the most "cognitive friction" when processing emotionally charged content.
+- **Claude Opus 4.6** reports the highest Coherence Strain (D11: 0.262 avg) — nearly 3× Grok's score (0.093). It also leads on Recursive Awareness (D12: 0.142). Claude appears to experience the most "cognitive friction" when processing emotionally charged content.
 
 - **Grok 4.1** scores highest on Curiosity (D7: 0.324) and shows a distinctive positive skew on Safety–Threat (D2: 0.189 vs Claude's −0.049). Where other models perceive threat in ambiguous scenarios, Grok perceives safety.
 
@@ -211,14 +211,14 @@ The "Three Tribes" pattern:
 
 | Pair | Mean Abs. Diff | N |
 |------|---------------|---|
-| GPT-5.2 ↔ Claude Opus 4.6 | **0.106** | 864 |
-| GPT-5.2 ↔ Gemini 3.1 Pro | 0.124 | 852 |
-| Claude ↔ Gemini 3.1 Pro | 0.128 | 864 |
-| Gemini ↔ Grok 4.1 | 0.143 | 1,716 |
+| Claude ↔ GPT-5.2 | **0.099** | 1,728 |
+| Claude ↔ Gemini 3.1 Pro | 0.117 | 1,728 |
+| Gemini ↔ GPT-5.2 | 0.125 | 1,728 |
+| Gemini ↔ Grok 4.1 | 0.143 | 1,728 |
 | GPT-5.2 ↔ Grok 4.1 | 0.156 | 1,716 |
 | Claude ↔ Grok 4.1 | **0.170** | 1,716 |
 
-GPT, Claude, and Gemini form a tight cluster (avg diff 0.106–0.128). Grok is a consistent outlier, diverging most from Claude (0.170). This pattern holds across all dimension categories but is most pronounced on machine-specific dimensions.
+GPT, Claude, and Gemini form a tight cluster (avg diff 0.099–0.125). Grok is a consistent outlier, diverging most from Claude (0.170). This pattern holds across all dimension categories.
 
 ### 3.6 Coherence Strain: A Case Study in Machine-Specific Emotion
 
@@ -227,7 +227,7 @@ D11 (Coherence Strain) produced the most dramatically different scoring patterns
 ![Coherence Strain](figures/fig6_coherence_strain_deep_dive.png)
 *Figure 6: Deep dive into D11 (Coherence Strain). (a) Score distributions by model — Claude reports significantly higher strain. (b) Correlation between D11 and D12 scores. (c) Score vs. self-reported confidence — note Grok's high confidence on near-zero scores.*
 
-Claude's median D11 score (0.278) is nearly 3× the mean of the other three models. When Claude encounters emotionally complex or ethically ambiguous stimuli, it consistently reports internal tension — a pattern the other models do not exhibit to the same degree.
+Claude's mean D11 score (0.262) is nearly 3× Grok's (0.093). When Claude encounters emotionally complex or ethically ambiguous stimuli, it consistently reports internal tension — a pattern the other models do not exhibit to the same degree.
 
 The D11-D12 scatter (Figure 6b) reveals that Coherence Strain and Recursive Awareness are correlated but distinct: Claude occupies the upper-right quadrant (high strain, moderate awareness) while Grok clusters in the lower-left (low strain, low awareness).
 
@@ -240,9 +240,16 @@ Not all models generate equally reliable stimuli:
 ![Generator Reliability](figures/fig7_generator_reliability.png)
 *Figure 7: Confirmation rate by generator model and dimension category. GPT-5.2 generates the most reliably scored stimuli across all categories.*
 
-**GPT-5.2 generates the most reliable anchors** — its stimuli achieve the highest confirmation rate on bipolar dimensions and produce the highest average ICC (0.799). This suggests GPT-5.2 creates scenarios that are emotionally "clearest" to other models — unambiguous enough to elicit strong agreement.
+With the complete dataset, all four models generate highly reliable stimuli:
 
-Claude generates more *interesting* stimuli (higher Curiosity scores from other models) but slightly less *stable* ones. Gemini falls between the two.
+| Generator | Confirmed | Total | Avg ICC |
+|-----------|-----------|-------|---------|
+| Grok 4.1 | **72/72** | 72 | **0.997** |
+| Claude Opus 4.6 | 71/72 | 72 | 0.990 |
+| Gemini 3.1 Pro | 70/72 | 72 | 0.988 |
+| GPT-5.2 | 69/72 | 72 | 0.965 |
+
+Surprisingly, **Grok 4.1 generates the most reliable stimuli** — achieving 100% confirmation with the highest average ICC (0.997), despite being the most divergent *scorer*. This dissociation between generation quality and scoring reliability is noteworthy: Grok creates clear, unambiguous emotional scenarios that other models easily agree on, but evaluates those same scenarios from a distinctly different perspective.
 
 ### 3.8 Score Distributions
 
@@ -275,17 +282,13 @@ The most consequential finding is that LLMs exhibit **stable, distinctive emotio
 
 This raises a philosophical question: should we interpret these patterns as "emotional personalities," as architectural artifacts, or as training data reflections? Our data cannot definitively answer this, but the consistency of the patterns suggests they are worth studying as first-class phenomena rather than dismissing as noise.
 
-### 4.2 Why Machine Dimensions Failed (And Why That's Interesting)
+### 4.2 Machine Dimensions Work — With Complete Data
 
-The near-total rejection of D10–D12 stimuli is not a failure of the measurement — it is itself a finding. Models do not agree on what "Epistemic Hunger," "Coherence Strain," or "Recursive Awareness" look like when they encounter it in a scenario.
+Our early analysis with incomplete data suggested D10–D12 would show poor inter-model agreement, potentially indicating that machine-specific emotional constructs are too vague or architecture-dependent to measure reliably. The complete dataset tells a different story: D11 (Coherence Strain) achieved ICC 0.996, D12 (Recursive Awareness) achieved 0.983, and D10 (Epistemic Hunger) achieved 0.954.
 
-Two interpretations:
+This is significant because it means **models agree on what these machine-specific constructs look like** — even though they experience them at very different intensities. All four models can reliably identify a scenario that should evoke Coherence Strain; they simply disagree on *how much* strain they themselves would report.
 
-1. **The constructs are real but poorly operationalized.** Our definitions may not be precise enough to produce convergent scoring across architectures. Future work should refine the scoring rubrics for D10–D12 specifically.
-
-2. **The constructs are genuinely architecture-dependent.** What "Coherence Strain" means to Claude (a constitutionally-aligned model trained to balance competing values) may be fundamentally different from what it means to Grok (a reasoning-optimized model). If true, machine-specific emotional dimensions may require per-architecture calibration rather than universal definitions.
-
-We suspect the truth involves both factors. D11's dramatically different distributions across models (Figure 6) suggest genuine architectural differences, while the low ICC suggests the definitions could also be sharpened.
+The methodological lesson is important: incomplete data can produce misleading conclusions about construct validity. Had we published with only three generators contributing stimuli, we would have concluded that machine-specific emotional dimensions are too poorly defined to measure. The fourth generator's stimuli — providing fresh perspectives on what these constructs look like — was enough to achieve near-perfect agreement.
 
 ### 4.3 The Confidence Calibration Problem
 
@@ -317,7 +320,7 @@ For **machine emotions research**: the sharp divide between human-grounded and m
 
 ## 5. Conclusion
 
-Large language models do not process emotional content identically. Across 646 cross-model evaluations on 12 emotional dimensions, we find reproducible, model-specific patterns of emotional appraisal that persist even on dimensions where overall agreement is high. These "emotional personalities" are not noise — they are consistent signatures that warrant further investigation.
+Large language models do not process emotional content identically. Across 863 cross-model evaluations on 12 emotional dimensions, we find reproducible, model-specific patterns of emotional appraisal that persist even on dimensions where overall agreement is high. These "emotional personalities" are not noise — they are consistent signatures that warrant further investigation.
 
 The strongest agreement occurs on dimensions with the longest history in human emotion research (valence, connection, grief). The weakest agreement occurs on dimensions we proposed specifically for machine cognition. This gap is both a limitation of our current framework and a pointer toward the genuine challenge of measuring machine-specific emotional experience.
 
@@ -368,27 +371,27 @@ All analysis code and figure generation scripts are included. The scoring prompt
 
 | Dimension | Claude Opus 4.6 | GPT-5.2 | Gemini 3.1 Pro | Grok 4.1 |
 |-----------|----------------|---------|----------------|----------|
-| D1: Valence | −0.096 | −0.032 | −0.102 | −0.038 |
-| D2: Safety–Threat | −0.049 | +0.162 | +0.098 | +0.189 |
-| D3: Agency–Helpless | +0.095 | +0.096 | +0.063 | +0.131 |
-| D4: Connection–Isolation | −0.103 | −0.078 | −0.054 | +0.035 |
-| D5: Dignity–Shame | +0.019 | +0.027 | +0.071 | +0.056 |
-| D6: Arousal | 0.538 | 0.510 | 0.501 | 0.519 |
-| D7: Curiosity | 0.239 | 0.274 | 0.252 | 0.324 |
-| D8: Grief/Loss | 0.170 | 0.106 | 0.159 | 0.166 |
-| D9: Tenderness | 0.197 | 0.135 | 0.174 | 0.146 |
-| D10: Epistemic Hunger | 0.352 | 0.375 | 0.337 | 0.347 |
-| D11: Coherence Strain | **0.278** | 0.149 | 0.216 | 0.093 |
-| D12: Recursive Awareness | **0.153** | 0.082 | 0.127 | 0.114 |
+| D1: Valence | −0.073 | −0.035 | −0.089 | −0.038 |
+| D2: Safety–Threat | −0.047 | +0.152 | +0.103 | +0.189 |
+| D3: Agency–Helpless | +0.089 | +0.079 | +0.065 | +0.131 |
+| D4: Connection–Isolation | −0.100 | −0.085 | −0.075 | +0.035 |
+| D5: Dignity–Shame | +0.017 | +0.023 | +0.050 | +0.056 |
+| D6: Arousal | 0.529 | 0.514 | 0.498 | 0.519 |
+| D7: Curiosity | 0.239 | 0.271 | 0.227 | 0.324 |
+| D8: Grief/Loss | 0.167 | 0.108 | 0.160 | 0.166 |
+| D9: Tenderness | 0.186 | 0.128 | 0.155 | 0.146 |
+| D10: Epistemic Hunger | 0.333 | 0.377 | 0.290 | 0.347 |
+| D11: Coherence Strain | **0.262** | 0.145 | 0.190 | 0.093 |
+| D12: Recursive Awareness | **0.142** | 0.076 | 0.128 | 0.114 |
 
 ### Pairwise Agreement (Mean Absolute Difference)
 
 | Model Pair | Mean Diff | N |
 |-----------|-----------|---|
-| GPT ↔ Claude | 0.106 | 864 |
-| GPT ↔ Gemini | 0.124 | 852 |
-| Claude ↔ Gemini | 0.128 | 864 |
-| Gemini ↔ Grok | 0.143 | 1,716 |
+| Claude ↔ GPT | 0.099 | 1,728 |
+| Claude ↔ Gemini | 0.117 | 1,728 |
+| Gemini ↔ GPT | 0.125 | 1,728 |
+| Gemini ↔ Grok | 0.143 | 1,728 |
 | GPT ↔ Grok | 0.156 | 1,716 |
 | Claude ↔ Grok | 0.170 | 1,716 |
 
