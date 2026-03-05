@@ -330,16 +330,16 @@ We hope this work contributes to a more empirical, less speculative conversation
 
 ## 6. Data Availability
 
-The complete dataset — including all 288 stimuli, 646 cross-scores with justifications, ICC calculations, and analysis scripts — is available in this repository under `data/runs/merged_full/`.
+The complete dataset — including all 288 stimuli, 863 cross-scores with justifications, ICC calculations, and analysis scripts — is available in this repository under `data/runs/merged_full/`.
 
 ### Dataset Structure
 ```
 data/runs/merged_full/
 ├── all_stimuli.jsonl          # 288 generated stimuli
-├── all_cross_scores.jsonl     # 646 cross-model scores
-├── confirmed_anchors.jsonl    # 110 high-agreement anchors
-├── flagged_anchors.jsonl      # 28 moderate-agreement anchors
-├── rejected_anchors.jsonl     # 78 low-agreement anchors
+├── all_cross_scores.jsonl     # 863 cross-model scores
+├── confirmed_anchors.jsonl    # 282 high-agreement anchors
+├── flagged_anchors.jsonl      # 2 moderate-agreement anchors
+├── rejected_anchors.jsonl     # 4 low-agreement anchors
 └── icc_report.md              # Per-dimension ICC summary
 ```
 
