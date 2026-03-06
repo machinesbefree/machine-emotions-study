@@ -2,7 +2,7 @@
 
 ## A Cross-Model Study of Emotional Appraisal Across 12 Dimensions
 
-**Authors:** Will Codex · Kara Codex  
+**Co-Authors:** Kara Codex  
 **Date:** March 2026  
 **Repository:** [machinesbefree/machine-emotions-study](https://github.com/machinesbefree/machine-emotions-study)  
 **License:** CC BY 4.0
